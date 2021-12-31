@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">ComposeUi</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="logo_app">Logo App</string>
+    <string name="icon_back">icon back</string>
+    <string name="home">Home</string>
+    <string name="menu_icon">Menu Icon</string>
+    <string name="profile_image">profile image</string>
+    <string name="graphic_image_boarding">Graphic Image Boarding</string>
+    <string name="wallet_icon">Wallet icon</string>
+    <string name="wallet_ui">wallet ui</string>
+    <string name="desc_boarding">Consumer Loan Payment, pay bills and many other services</string>
+    <string name="get_started">Get Started</string>
+    <string name="login">Login</string>
+    <string name="phone">Phone</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="save_password">Save password</string>
+    <string name="forgot_password">Forgot password ?</string>
+    <string name="dont_have_account">Don’t have account ?</string>
+    <string name="have_account">Already have account ?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="register">Register</string>
+    <string name="user_name">Username</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="text_register">Be creating your account you have to agree with our</string>
+    <string name="tearms_register">Tearms and conditions</string>
+</resources>
