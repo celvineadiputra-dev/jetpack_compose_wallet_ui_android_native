@@ -13,6 +13,7 @@
     <string name="get_started">Get Started</string>
     <string name="login">Login</string>
     <string name="phone">Phone</string>
+    <string name="phone_number">Phone Number</string>
     <string name="password">Password</string>
     <string name="log_in">Log in</string>
     <string name="save_password">Save password</string>
@@ -25,4 +26,5 @@
     <string name="confirm_password">Confirm password</string>
     <string name="text_register">Be creating your account you have to agree with our</string>
     <string name="tearms_register">Tearms and conditions</string>
+    <string name="eight_characters">At least 8 characters</string>
 </resources>

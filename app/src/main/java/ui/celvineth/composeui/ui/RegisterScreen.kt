@@ -23,10 +23,26 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ui.celvineth.composeui.R
 import ui.celvineth.composeui.ui.theme.*
+import ui.celvineth.composeui.ui.theme.component.ButtonComponent
 import ui.celvineth.composeui.ui.theme.component.NavigationComponent
+import ui.celvineth.composeui.ui.theme.component.field.OutlineField
+import ui.celvineth.composeui.ui.theme.component.field.OutlinePasswordField
+import ui.celvineth.composeui.ui.theme.component.field.TextFieldState
 
 @Composable
 fun RegisterScreen(navController: NavController) {
+    var userNameState = remember {
+        TextFieldState()
+    }
+    var phoneNumberState = remember {
+        TextFieldState()
+    }
+    var passwordState = remember {
+        TextFieldState()
+    }
+    var confirmPasswordState = remember {
+        TextFieldState()
+    }
     ComposeUiTheme {
         Column(
             modifier = Modifier
@@ -43,217 +59,43 @@ fun RegisterScreen(navController: NavController) {
                     .verticalScroll(rememberScrollState())
             ) {
                 Spacer(modifier = Modifier.height(8.dp))
-                userNameSectionRegister()
+                OutlineField(
+                    textState = userNameState,
+                    label = stringResource(id = R.string.user_name),
+                    placeholder = stringResource(id = R.string.user_name)
+                )
                 Spacer(modifier = Modifier.height(10.dp))
-                phoneSectionRegister()
+                OutlineField(
+                    textState = phoneNumberState,
+                    label = stringResource(id = R.string.phone),
+                    placeholder = stringResource(id = R.string.phone_number)
+                )
                 Spacer(modifier = Modifier.height(10.dp))
-                passwordSectionRegister()
+                OutlinePasswordField(
+                    passwordState = passwordState,
+                    label = stringResource(id = R.string.password),
+                    placeholder = stringResource(
+                        id = R.string.eight_characters
+                    )
+                )
                 Spacer(modifier = Modifier.height(10.dp))
-                confirmPasswordSectionRegister()
+                OutlinePasswordField(
+                    passwordState = confirmPasswordState,
+                    label = stringResource(id = R.string.confirm_password),
+                    placeholder = stringResource(
+                        id = R.string.eight_characters
+                    )
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 checkSectionRegister()
                 Spacer(modifier = Modifier.height(40.dp))
-                buttonSectionRegister()
+                ButtonComponent(label = stringResource(id = R.string.register), onClick = {
+
+                })
                 Spacer(modifier = Modifier.height(16.dp))
                 signinSectionRegister(navController = navController)
             }
         }
-    }
-}
-
-@Composable
-fun userNameSectionRegister() {
-    Column(
-        modifier = Modifier.padding(horizontal = 24.dp)
-    ) {
-        var textState by remember {
-            mutableStateOf("")
-        }
-        Text(
-            text = stringResource(R.string.user_name),
-            style = MaterialTheme.typography.caption,
-            color = secondary
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-            value = textState,
-            onValueChange = { textState = it },
-            label = {
-                Text(
-                    text = stringResource(id = R.string.user_name),
-                    style = MaterialTheme.typography.body1
-                )
-            },
-            placeholder = {
-                Text(
-                    text = stringResource(id = R.string.user_name),
-                    style = MaterialTheme.typography.body1
-                )
-            },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = primary,
-                unfocusedBorderColor = borderNor,
-                backgroundColor = primary
-            ),
-            maxLines = 1,
-            singleLine = true,
-            shape = MaterialTheme.shapes.small,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
-}
-
-@Composable
-fun phoneSectionRegister() {
-    Column(
-        modifier = Modifier.padding(horizontal = 24.dp)
-    ) {
-        var textState by remember {
-            mutableStateOf("")
-        }
-        Text(
-            text = stringResource(R.string.phone),
-            style = MaterialTheme.typography.caption,
-            color = secondary
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-            value = textState,
-            onValueChange = { textState = it },
-            label = {
-                Text(text = "Phone Number", style = MaterialTheme.typography.body1)
-            },
-            placeholder = {
-                Text(text = "Phone Number", style = MaterialTheme.typography.body1)
-            },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = primary,
-                unfocusedBorderColor = borderNor,
-                backgroundColor = primary
-            ),
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-            maxLines = 1,
-            singleLine = true,
-            shape = MaterialTheme.shapes.small,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
-}
-
-@Composable
-fun passwordSectionRegister() {
-    Column(
-        modifier = Modifier.padding(horizontal = 24.dp)
-    ) {
-        var textState by remember {
-            mutableStateOf("")
-        }
-        var passwordVisibility by remember {
-            mutableStateOf(false)
-        }
-        Text(
-            text = stringResource(R.string.password),
-            style = MaterialTheme.typography.caption,
-            color = secondary
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-            value = textState,
-            onValueChange = { textState = it },
-            label = {
-                Text(text = "Password", style = MaterialTheme.typography.body1)
-            },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = primary,
-                unfocusedBorderColor = borderNor,
-                backgroundColor = primary
-            ),
-            placeholder = {
-                Text(text = "At least 8 characters", style = MaterialTheme.typography.body1)
-            },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password),
-            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
-            trailingIcon = {
-                IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
-                    if (passwordVisibility) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_show),
-                            contentDescription = "Hide",
-                            modifier = Modifier.size(20.dp)
-                        )
-                    } else {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_hide),
-                            contentDescription = "Hide",
-                            modifier = Modifier.size(20.dp)
-                        )
-                    }
-                }
-            },
-            maxLines = 1,
-            shape = MaterialTheme.shapes.small,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
-}
-
-@Composable
-fun confirmPasswordSectionRegister() {
-    Column(
-        modifier = Modifier.padding(horizontal = 24.dp)
-    ) {
-        var textState by remember {
-            mutableStateOf("")
-        }
-        var passwordVisibility by remember {
-            mutableStateOf(false)
-        }
-        Text(
-            text = stringResource(R.string.confirm_password),
-            style = MaterialTheme.typography.caption,
-            color = secondary
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-            value = textState,
-            onValueChange = { textState = it },
-            label = {
-                Text(
-                    text = stringResource(id = R.string.confirm_password),
-                    style = MaterialTheme.typography.body1
-                )
-            },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = primary,
-                unfocusedBorderColor = borderNor,
-                backgroundColor = primary
-            ),
-            placeholder = {
-                Text(text = "At least 8 characters", style = MaterialTheme.typography.body1)
-            },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password),
-            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
-            trailingIcon = {
-                IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
-                    if (passwordVisibility) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_show),
-                            contentDescription = "Hide",
-                            modifier = Modifier.size(20.dp)
-                        )
-                    } else {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_hide),
-                            contentDescription = "Hide",
-                            modifier = Modifier.size(20.dp)
-                        )
-                    }
-                }
-            },
-            maxLines = 1,
-            shape = MaterialTheme.shapes.small,
-            modifier = Modifier.fillMaxWidth()
-        )
     }
 }
 
@@ -282,22 +124,6 @@ fun checkSectionRegister() {
                 color = onSurface
             )
         }
-    }
-}
-
-@Composable
-fun buttonSectionRegister() {
-    Button(
-        onClick = { /*TODO*/ }, modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 24.dp),
-        shape = MaterialTheme.shapes.medium
-    ) {
-        Text(
-            text = stringResource(id = R.string.register),
-            modifier = Modifier.padding(vertical = 15.dp),
-            style = MaterialTheme.typography.body2
-        )
     }
 }
 

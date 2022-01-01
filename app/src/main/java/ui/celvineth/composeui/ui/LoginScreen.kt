@@ -5,32 +5,35 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ui.celvineth.composeui.R
 import ui.celvineth.composeui.ui.theme.*
+import ui.celvineth.composeui.ui.theme.component.ButtonComponent
 import ui.celvineth.composeui.ui.theme.component.NavigationComponent
+import ui.celvineth.composeui.ui.theme.component.field.OutlineField
+import ui.celvineth.composeui.ui.theme.component.field.OutlinePasswordField
+import ui.celvineth.composeui.ui.theme.component.field.TextFieldState
 
-
-class TextFieldState() {
-    var text: String by mutableStateOf("")
-}
 
 @Composable
 fun LoginScreen(navController: NavController) {
     val context = LocalContext.current
+
+    var phoneIsError by remember {
+        mutableStateOf(false)
+    }
+    var phoneErrorMessage by remember {
+        mutableStateOf("")
+    }
+
     var phoneState = remember {
         TextFieldState()
     }
@@ -45,118 +48,43 @@ fun LoginScreen(navController: NavController) {
                 navController = navController
             )
             Spacer(modifier = Modifier.height(8.dp))
-            phoneSection(phoneState = phoneState)
+            OutlineField(
+                textState = phoneState,
+                label = stringResource(id = R.string.phone),
+                placeholder = stringResource(
+                    id = R.string.phone_number
+                ),
+                isError = phoneIsError,
+                errorMessage = phoneErrorMessage
+            )
             Spacer(modifier = Modifier.height(28.dp))
-            passwordSection(passwordState = passwordState)
+            OutlinePasswordField(
+                passwordState = passwordState,
+                label = stringResource(id = R.string.password),
+                placeholder = stringResource(
+                    id = R.string.eight_characters
+                )
+            )
             Spacer(modifier = Modifier.height(8.dp))
             checkSection(navController)
             Spacer(modifier = Modifier.height(40.dp))
-            buttonSection(navController, onClick = {
-                if(phoneState.text.isNotEmpty() && passwordState.text.isNotEmpty()){
-                    Toast.makeText(context, "${phoneState.text} and ${passwordState.text}", Toast.LENGTH_SHORT).show()
-                }else{
-                    Toast.makeText(context, "Field required", Toast.LENGTH_SHORT).show()
+            ButtonComponent(label = stringResource(id = R.string.log_in), onClick = {
+                phoneIsError = false
+                phoneErrorMessage = ""
+                if (phoneState.text.isNotEmpty() && passwordState.text.isNotEmpty()) {
+                    Toast.makeText(
+                        context,
+                        "${phoneState.text} and ${passwordState.text}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else if (phoneState.text.isEmpty()){
+                    phoneIsError = true
+                    phoneErrorMessage = "Field is required !"
                 }
             })
             Spacer(modifier = Modifier.height(16.dp))
             signupSection(navController)
         }
-    }
-}
-
-@Composable
-fun phoneSection(
-    phoneState: TextFieldState = remember {
-        TextFieldState()
-    }
-) {
-    Column(
-        modifier = Modifier.padding(horizontal = 24.dp)
-    ) {
-        Text(
-            text = stringResource(R.string.phone),
-            style = MaterialTheme.typography.caption,
-            color = secondary
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-            value = phoneState.text,
-            onValueChange = { phoneState.text = it },
-            label = {
-                Text(text = "Phone Number", style = MaterialTheme.typography.body1)
-            },
-            placeholder = {
-                Text(text = "Phone Number", style = MaterialTheme.typography.body1)
-            },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = primary,
-                unfocusedBorderColor = borderNor,
-                backgroundColor = primary
-            ),
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-            maxLines = 1,
-            singleLine = true,
-            shape = MaterialTheme.shapes.small,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
-}
-
-@Composable
-fun passwordSection(
-    passwordState: TextFieldState = remember {
-        TextFieldState()
-    }
-) {
-    Column(
-        modifier = Modifier.padding(horizontal = 24.dp)
-    ) {
-        var passwordVisibility by remember {
-            mutableStateOf(false)
-        }
-        Text(
-            text = stringResource(R.string.password),
-            style = MaterialTheme.typography.caption,
-            color = secondary
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-            value = passwordState.text,
-            onValueChange = { passwordState.text = it },
-            label = {
-                Text(text = "Password", style = MaterialTheme.typography.body1)
-            },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = primary,
-                unfocusedBorderColor = borderNor,
-                backgroundColor = primary
-            ),
-            placeholder = {
-                Text(text = "At least 8 characters", style = MaterialTheme.typography.body1)
-            },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password),
-            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
-            trailingIcon = {
-                IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
-                    if (passwordVisibility) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_show),
-                            contentDescription = "Hide",
-                            modifier = Modifier.size(20.dp)
-                        )
-                    } else {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_hide),
-                            contentDescription = "Hide",
-                            modifier = Modifier.size(20.dp)
-                        )
-                    }
-                }
-            },
-            maxLines = 1,
-            shape = MaterialTheme.shapes.small,
-            modifier = Modifier.fillMaxWidth()
-        )
     }
 }
 
@@ -202,23 +130,6 @@ fun checkSection(navController: NavController) {
                 color = primary
             )
         }
-    }
-}
-
-@Composable
-fun buttonSection(navController: NavController, onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 24.dp),
-        shape = MaterialTheme.shapes.medium
-    ) {
-        Text(
-            text = stringResource(id = R.string.log_in),
-            modifier = Modifier.padding(vertical = 15.dp),
-            style = MaterialTheme.typography.body2
-        )
     }
 }
 
