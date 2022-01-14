@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ui.celvineth.composeui.R
 import ui.celvineth.composeui.ui.theme.ComposeUiTheme
+import ui.celvineth.composeui.ui.theme.component.ButtonComponent
 import ui.celvineth.composeui.ui.theme.onSurface
 import ui.celvineth.composeui.ui.theme.secondary
 
@@ -35,7 +36,10 @@ fun BoardingScreen(navController: NavController) {
             GraphicSection()
             TextSection()
             Spacer(modifier = Modifier.height(40.dp))
-            ButtonSection(navController)
+            ButtonComponent(label = stringResource(R.string.get_started), onClick = {
+                navController.navigate("login_screen")
+            })
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }
@@ -83,22 +87,4 @@ fun TextSection() {
                 .width(223.dp)
         )
     }
-}
-
-@Composable
-fun ButtonSection(navController: NavController) {
-    Button(
-        onClick = {
-            navController.navigate("login_screen")
-        },
-        modifier = Modifier.width(327.dp),
-        shape = MaterialTheme.shapes.medium
-    ) {
-        Text(
-            text = stringResource(R.string.get_started),
-            style = MaterialTheme.typography.body2,
-            modifier = Modifier.padding(vertical = 15.dp)
-        )
-    }
-    Spacer(modifier = Modifier.height(20.dp))
 }

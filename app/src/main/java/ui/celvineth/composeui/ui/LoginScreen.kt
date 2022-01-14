@@ -77,6 +77,7 @@ fun LoginScreen(navController: NavController) {
                         "${phoneState.text} and ${passwordState.text}",
                         Toast.LENGTH_SHORT
                     ).show()
+                    navController.navigate("home_screen")
                 } else if (phoneState.text.isEmpty()){
                     phoneIsError = true
                     phoneErrorMessage = "Field is required !"

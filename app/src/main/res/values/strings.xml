@@ -27,4 +27,18 @@
     <string name="text_register">Be creating your account you have to agree with our</string>
     <string name="tearms_register">Tearms and conditions</string>
     <string name="eight_characters">At least 8 characters</string>
+    <string name="topUp">Top up</string>
+    <string name="wallet">Wallet</string>
+    <string name="qr_scan">Qr Scan</string>
+    <string name="my_qr">My QR</string>
+    <string name="sendAgain">Send Again</string>
+    <string name="payment_list">Payment List</string>
+    <string name="electricity">Electricity</string>
+    <string name="internet">Internet</string>
+    <string name="insurrance">Insurrance</string>
+    <string name="medical">Medical</string>
+    <string name="market">Market</string>
+    <string name="electric_bill">Electric bill</string>
+    <string name="television">Television</string>
+    <string name="water_bill">Waterbill</string>
 </resources>
