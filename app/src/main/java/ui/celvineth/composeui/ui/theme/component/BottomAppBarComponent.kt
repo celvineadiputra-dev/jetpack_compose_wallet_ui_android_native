@@ -5,10 +5,12 @@ import androidx.compose.material.BottomAppBar
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import ui.celvineth.composeui.R
 import ui.celvineth.composeui.ui.theme.dp70
 import ui.celvineth.composeui.ui.theme.onSurface
@@ -16,28 +18,44 @@ import ui.celvineth.composeui.ui.theme.primary
 import ui.celvineth.composeui.ui.theme.white
 
 
-data class menuList(val title: String, val iconActive: Int, val iconUnActive: Int)
+data class MenuList(
+    val title: String,
+    val screen: String,
+    val iconActive: Int,
+    val iconUnActive: Int
+)
 
-@Preview
 @Composable
-fun AppBottomBar() {
-    var selectedState = remember {
-        "home"
-    }
+fun AppBottomBar(navController: NavController) {
+    var selectedState = remember { mutableStateOf("home") }
 
     BottomAppBar(modifier = Modifier.height(dp70), backgroundColor = white) {
-        val valueMenu: List<menuList> = listOf(
-            menuList("home", R.drawable.ic_home, R.drawable.ic_home),
-            menuList("chart", R.drawable.ic_chart, R.drawable.ic_chart),
-            menuList("discount", R.drawable.ic_discount, R.drawable.ic_discount),
-            menuList("profile", R.drawable.ic_profile, R.drawable.ic_profile)
+        val valueMenu: List<MenuList> = listOf(
+            MenuList("home", "home_screen", R.drawable.ic_home_active, R.drawable.ic_home),
+            MenuList("chart", "chart_screen", R.drawable.ic_chart_active, R.drawable.ic_chart),
+            MenuList(
+                "discount",
+                "discount_screen",
+                R.drawable.ic_discount_active,
+                R.drawable.ic_discount
+            ),
+            MenuList(
+                "profile",
+                "profile_screen",
+                R.drawable.ic_profile_active,
+                R.drawable.ic_profile
+            )
         )
         for (item in valueMenu) {
             BottomNavigationItem(
-                selected = selectedState == item.title,
-                onClick = { selectedState = item.title },
+                selected = selectedState.value == item.title,
+                onClick = {
+                    selectedState.value = item.title
+                    navController.popBackStack()
+                    navController.navigate(item.screen)
+                },
                 icon = {
-                    if (selectedState == item.title) {
+                    if (selectedState.value == item.title) {
                         Icon(
                             painter = painterResource(id = item.iconActive),
                             contentDescription = item.title

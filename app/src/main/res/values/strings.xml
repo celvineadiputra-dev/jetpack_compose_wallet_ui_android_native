@@ -42,4 +42,7 @@
     <string name="television">Television</string>
     <string name="water_bill">Waterbill</string>
     <string name="trading_history">Trading history</string>
+    <string name="analyse">Analyse</string>
+    <string name="income">Income</string>
+    <string name="outcome">Outcome</string>
 </resources>

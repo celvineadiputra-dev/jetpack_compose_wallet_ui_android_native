@@ -22,11 +22,9 @@ import ui.celvineth.composeui.ui.section.Payment
 import ui.celvineth.composeui.ui.section.Stories
 import ui.celvineth.composeui.ui.section.TradingHistory
 import ui.celvineth.composeui.ui.theme.*
-import ui.celvineth.composeui.ui.theme.component.AppBottomBar
 import ui.celvineth.composeui.ui.theme.component.Separator
 
 
-@Preview
 @Composable
 fun HomeScreen() {
     val scrollState = rememberScrollState()
@@ -76,9 +74,6 @@ fun HomeScreen() {
             Separator()
             TradingHistory()
             Spacer(modifier = Modifier.height(dp70))
-        }
-        Row(modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.Bottom) {
-            AppBottomBar()
         }
     }
 }
