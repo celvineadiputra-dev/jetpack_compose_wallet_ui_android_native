@@ -1,21 +1,17 @@
 package ui.celvineth.composeui.ui
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -24,18 +20,22 @@ import androidx.compose.ui.unit.dp
 import ui.celvineth.composeui.R
 import ui.celvineth.composeui.ui.section.Payment
 import ui.celvineth.composeui.ui.section.Stories
+import ui.celvineth.composeui.ui.section.TradingHistory
 import ui.celvineth.composeui.ui.theme.*
+import ui.celvineth.composeui.ui.theme.component.AppBottomBar
 import ui.celvineth.composeui.ui.theme.component.Separator
 
 
 @Preview
 @Composable
 fun HomeScreen() {
+    val scrollState = rememberScrollState()
     ComposeUiTheme {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .background(color = white)
+                .verticalScroll(scrollState)
         ) {
             HeaderSection()
             Row(
@@ -74,10 +74,14 @@ fun HomeScreen() {
                 Payment()
             }
             Separator()
+            TradingHistory()
+            Spacer(modifier = Modifier.height(dp70))
+        }
+        Row(modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.Bottom) {
+            AppBottomBar()
         }
     }
 }
-
 
 @Composable
 fun HeaderSection() {

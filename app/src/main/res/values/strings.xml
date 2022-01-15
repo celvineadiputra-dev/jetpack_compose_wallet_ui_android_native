@@ -41,4 +41,5 @@
     <string name="electric_bill">Electric bill</string>
     <string name="television">Television</string>
     <string name="water_bill">Waterbill</string>
+    <string name="trading_history">Trading history</string>
 </resources>
