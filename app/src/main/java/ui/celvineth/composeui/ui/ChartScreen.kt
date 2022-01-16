@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import ui.celvineth.composeui.R
 import ui.celvineth.composeui.ui.theme.*
+import ui.celvineth.composeui.ui.theme.component.AppBottomBar
 import ui.celvineth.composeui.ui.theme.component.NavigationComponent
 import ui.celvineth.composeui.ui.theme.component.Separator
 
@@ -46,6 +47,7 @@ fun ChartScreen(navController: NavController) {
             }
             Separator()
             chart()
+            Spacer(modifier = Modifier.height(dp70))
         }
     }
 }

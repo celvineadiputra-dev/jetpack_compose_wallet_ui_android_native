@@ -17,16 +17,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import ui.celvineth.composeui.R
 import ui.celvineth.composeui.ui.section.Payment
 import ui.celvineth.composeui.ui.section.Stories
 import ui.celvineth.composeui.ui.section.TradingHistory
 import ui.celvineth.composeui.ui.theme.*
+import ui.celvineth.composeui.ui.theme.component.AppBottomBar
 import ui.celvineth.composeui.ui.theme.component.Separator
 
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController : NavController) {
     val scrollState = rememberScrollState()
     ComposeUiTheme {
         Column(
