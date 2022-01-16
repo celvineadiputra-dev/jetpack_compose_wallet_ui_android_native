@@ -67,6 +67,10 @@ fun Navigation() {
                 bottomBarState.value = true
                 ChartScreen(navController = navController)
             }
+            composable("discount_screen") {
+                bottomBarState.value = true
+                VoucherScreen(navController = navController)
+            }
         }
     }
 }

@@ -45,4 +45,6 @@
     <string name="analyse">Analyse</string>
     <string name="income">Income</string>
     <string name="outcome">Outcome</string>
+    <string name="voucher">Voucher</string>
+    <string name="categories">Categories</string>
 </resources>
