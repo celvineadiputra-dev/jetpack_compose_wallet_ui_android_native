@@ -3,9 +3,11 @@ package ui.celvineth.composeui.ui.theme
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+val dp1 = 1.dp
 val dp2 = 2.dp
 val dp4 = 4.dp
 val dp5 = 5.dp
+val dp7 = 7.dp
 val dp8 = 8.dp
 val dp10 = 10.dp
 val dp12 = 12.dp

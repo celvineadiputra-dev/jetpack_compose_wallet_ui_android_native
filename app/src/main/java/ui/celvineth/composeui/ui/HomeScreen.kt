@@ -26,9 +26,9 @@ import ui.celvineth.composeui.ui.theme.*
 import ui.celvineth.composeui.ui.theme.component.AppBottomBar
 import ui.celvineth.composeui.ui.theme.component.Separator
 
-
+@Preview
 @Composable
-fun HomeScreen(navController : NavController) {
+fun HomeScreen() {
     val scrollState = rememberScrollState()
     ComposeUiTheme {
         Column(
@@ -38,44 +38,48 @@ fun HomeScreen(navController : NavController) {
                 .verticalScroll(scrollState)
         ) {
             HeaderSection()
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .offset(y = -dp40)
-                    .padding(horizontal = dp16),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                ToolBar()
-            }
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = dp16, bottom = dp12)
+                    .offset(y = -dp40),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = stringResource(id = R.string.sendAgain),
-                    style = MaterialTheme.typography.h4
-                )
-                Spacer(modifier = Modifier.height(dp12))
-                Stories()
+                Column(
+                    modifier = Modifier
+                        .padding(horizontal = dp16),
+                ) {
+                    ToolBar()
+                }
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = dp16, top = dp12, bottom = dp12)
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.sendAgain),
+                        style = MaterialTheme.typography.h4
+                    )
+                    Spacer(modifier = Modifier.height(dp12))
+                    Stories()
+                }
+                Separator()
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = dp16, vertical = dp12)
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.payment_list),
+                        style = MaterialTheme.typography.h4
+                    )
+                    Spacer(modifier = Modifier.height(dp12))
+                    Payment()
+                }
+                Separator()
+                TradingHistory()
+                Spacer(modifier = Modifier.height(dp20))
             }
-            Separator()
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = dp16, vertical = dp12)
-            ) {
-                Text(
-                    text = stringResource(id = R.string.payment_list),
-                    style = MaterialTheme.typography.h4
-                )
-                Spacer(modifier = Modifier.height(dp12))
-                Payment()
-            }
-            Separator()
-            TradingHistory()
-            Spacer(modifier = Modifier.height(dp70))
         }
     }
 }
@@ -140,18 +144,19 @@ fun ToolBar() {
             .height(74.dp)
             .clip(RoundedCornerShape(dp15))
             .background(color = white)
-            .padding(horizontal = dp21, vertical = dp12)
     ) {
-        Row {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = dp21, vertical = dp12),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
             SubMenuToolBar(text = stringResource(id = R.string.topUp), icon = R.drawable.ic_topup)
-            Spacer(modifier = Modifier.width(dp35))
             SubMenuToolBar(text = stringResource(id = R.string.wallet), icon = R.drawable.ic_wallet)
-            Spacer(modifier = Modifier.width(dp35))
             SubMenuToolBar(
                 text = stringResource(id = R.string.qr_scan),
                 icon = R.drawable.ic_qr_scan
             )
-            Spacer(modifier = Modifier.width(dp35))
             SubMenuToolBar(text = stringResource(id = R.string.my_qr), icon = R.drawable.ic_my_qr)
         }
     }

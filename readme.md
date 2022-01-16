@@ -12,4 +12,6 @@ Repository ini hanya berupa slicing design ui android native dengan menggunakan 
     <img src="preview/boarding.jpg" width="250px"/>
     <img src="preview/login.jpg" width="250px"/>
     <img src="preview/register.jpg" width="250px"/>
+    <img src="preview/home.jpg" width="250px"/>
+    <img src="preview/chart.jpg" width="250px"/>
 </div>

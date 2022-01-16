@@ -61,7 +61,7 @@ fun Navigation() {
             }
             composable("home_screen") {
                 bottomBarState.value = true
-                HomeScreen(navController = navController)
+                HomeScreen()
             }
             composable("chart_screen") {
                 bottomBarState.value = true
