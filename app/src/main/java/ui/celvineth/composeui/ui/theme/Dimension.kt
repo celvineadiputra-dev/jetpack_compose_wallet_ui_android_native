@@ -32,10 +32,13 @@ val dp76 = 76.dp
 val dp114 = 114.dp
 val dp140 = 140.dp
 val dp163 = 163.dp
+val dp166 = 166.dp
 val dp170 = 170.dp
+val dp200 = 200.dp
 val dp300 = 300.dp
 
 val sp10 = 10.sp
+val sp12 = 12.sp
 val sp15 = 15.sp
 val sp18 = 18.sp
 val sp20 = 20.sp

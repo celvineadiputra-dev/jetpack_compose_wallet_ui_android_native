@@ -5,7 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ui.celvineth.composeui.R
 import ui.celvineth.composeui.ui.theme.*
@@ -25,8 +28,11 @@ import ui.celvineth.composeui.ui.theme.component.Separator
 
 @Composable
 fun VoucherScreen(navController: NavController) {
+    var scrollState = rememberScrollState()
     ComposeUiTheme {
-        Column {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)) {
             NavigationComponent(
                 navName = stringResource(id = R.string.voucher),
                 context = LocalContext.current,
@@ -37,6 +43,10 @@ fun VoucherScreen(navController: NavController) {
             Separator()
             ListCategories()
             Separator()
+            Sale()
+            Separator()
+            SaleOff()
+            Spacer(modifier = Modifier.height(dp70))
         }
     }
 }
@@ -126,7 +136,11 @@ fun ListCategories() {
     val listCategory = listOf(
         CategoryModel("All", R.drawable.ic_ticket, primary),
         CategoryModel(stringResource(id = R.string.internet), R.drawable.ic_internet, interactive),
-        CategoryModel(stringResource(id = R.string.electricity), R.drawable.ic_electricity, warning),
+        CategoryModel(
+            stringResource(id = R.string.electricity),
+            R.drawable.ic_electricity,
+            warning
+        ),
         CategoryModel(stringResource(id = R.string.market), R.drawable.ic_market, success),
         CategoryModel(stringResource(id = R.string.medical), R.drawable.ic_medical, critical),
         CategoryModel(stringResource(id = R.string.wallet), R.drawable.ic_water, softBlue),
@@ -139,7 +153,7 @@ fun ListCategories() {
         )
         LazyRow {
             items(listCategory) { item ->
-                Spacer(modifier = Modifier.width(dp10))
+                Spacer(modifier = Modifier.width(dp8))
                 Categories(text = item.text, icon = item.icon, color = item.color)
             }
         }
@@ -174,5 +188,207 @@ fun Categories(text: String, icon: Int, color: Color) {
                 color = onSurface
             )
         )
+    }
+}
+
+@Composable
+fun Sale() {
+    Column(modifier = Modifier.padding(dp16)) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = stringResource(id = R.string.top_trending_deals),
+                style = MaterialTheme.typography.h4.copy(color = onSurface, fontSize = sp18)
+            )
+            Text(
+                text = stringResource(id = R.string.view_all),
+                style = MaterialTheme.typography.caption.copy(color = primary)
+            )
+        }
+        Spacer(modifier = Modifier.height(dp12))
+        ListTopDeal()
+    }
+}
+
+@Composable
+fun SaleOff() {
+    Column(modifier = Modifier.padding(dp16)) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Sale off 50%",
+                style = MaterialTheme.typography.h4.copy(color = onSurface, fontSize = sp18)
+            )
+            Text(
+                text = stringResource(id = R.string.view_all),
+                style = MaterialTheme.typography.caption.copy(color = primary)
+            )
+        }
+        Spacer(modifier = Modifier.height(dp12))
+        ListSaleOff()
+    }
+}
+
+@Composable
+fun ListTopDeal() {
+    data class TopDeals(
+        val title: String,
+        val rating: String,
+        val category: String,
+        val type: String,
+        val image: Int
+    )
+
+    val listTopDeals = listOf(
+        TopDeals(
+            title = "Chillox Burger",
+            rating = "4.7",
+            category = "Burgers * Fast food",
+            type = "FreeShip",
+            image = R.drawable.ic_dummy_img
+        ),
+        TopDeals(
+            title = "Sandwich",
+            rating = "4.9",
+            category = "Sandwich * Fast food",
+            type = "FreeShip",
+            image = R.drawable.ic_dummy_img
+        ),
+        TopDeals(
+            title = "Chillox Burger",
+            rating = "4.7",
+            category = "Burgers * Fast food",
+            type = "FreeShip",
+            image = R.drawable.ic_dummy_img
+        ),
+    )
+
+    LazyRow {
+        items(listTopDeals) { item ->
+            CardSection(
+                title = item.title,
+                rating = item.rating,
+                category = item.category,
+                type = item.type,
+                image = item.image
+            )
+            Spacer(modifier = Modifier.width(dp10))
+        }
+    }
+}
+
+@Composable
+fun ListSaleOff() {
+    data class TopDeals(
+        val title: String,
+        val rating: String,
+        val category: String,
+        val type: String,
+        val image: Int
+    )
+
+    val listTopDeals = listOf(
+        TopDeals(
+            title = "Chillox Burger",
+            rating = "4.7",
+            category = "Burgers * Fast food",
+            type = "FreeShip",
+            image = R.drawable.ic_dummy_img
+        ),
+        TopDeals(
+            title = "Sandwich",
+            rating = "4.9",
+            category = "Sandwich * Fast food",
+            type = "FreeShip",
+            image = R.drawable.ic_dummy_img
+        ),
+        TopDeals(
+            title = "Chillox Burger",
+            rating = "4.7",
+            category = "Burgers * Fast food",
+            type = "FreeShip",
+            image = R.drawable.ic_dummy_img
+        ),
+    )
+
+    LazyRow {
+        items(listTopDeals) { item ->
+            CardSection(
+                title = item.title,
+                rating = item.rating,
+                category = item.category,
+                type = item.type,
+                image = item.image
+            )
+            Spacer(modifier = Modifier.width(dp10))
+        }
+    }
+}
+
+@Composable
+fun CardSection(title: String, rating: String, category: String, type: String, image: Int) {
+    Card(
+        modifier = Modifier
+            .width(dp200)
+            .height(dp166), backgroundColor = white
+    ) {
+        Column(modifier = Modifier.padding(0.dp)) {
+            Image(
+                painter = painterResource(id = image),
+                contentDescription = title,
+                modifier = Modifier
+                    .width(dp200)
+                    .height(100.dp)
+                    .padding(0.dp)
+            )
+            Column(modifier = Modifier.padding(dp8)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.caption.copy(fontWeight = FontWeight.Medium)
+                    )
+                    Text(
+                        text = type,
+                        style = MaterialTheme.typography.caption.copy(
+                            color = success,
+                            fontSize = sp12
+                        )
+                    )
+                }
+                Spacer(modifier = Modifier.height(dp4))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = category,
+                        style = MaterialTheme.typography.caption.copy(color = secondary)
+                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_star),
+                            contentDescription = "rating"
+                        )
+                        Spacer(modifier = Modifier.width(dp4))
+                        Text(
+                            text = rating,
+                            style = MaterialTheme.typography.caption.copy(color = onSurface)
+                        )
+                    }
+                }
+            }
+        }
     }
 }

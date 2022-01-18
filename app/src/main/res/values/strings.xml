@@ -47,4 +47,6 @@
     <string name="outcome">Outcome</string>
     <string name="voucher">Voucher</string>
     <string name="categories">Categories</string>
+    <string name="top_trending_deals">Top Trending Deals</string>
+    <string name="view_all">View All</string>
 </resources>
