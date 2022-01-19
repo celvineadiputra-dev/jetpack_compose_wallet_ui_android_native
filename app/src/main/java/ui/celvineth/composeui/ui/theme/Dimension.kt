@@ -40,6 +40,7 @@ val dp300 = 300.dp
 val sp10 = 10.sp
 val sp12 = 12.sp
 val sp15 = 15.sp
+val sp16 = 16.sp
 val sp18 = 18.sp
 val sp20 = 20.sp
 val sp24 = 24.sp

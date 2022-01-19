@@ -49,4 +49,13 @@
     <string name="categories">Categories</string>
     <string name="top_trending_deals">Top Trending Deals</string>
     <string name="view_all">View All</string>
+    <string name="profile">Profile</string>
+    <string name="point">Point</string>
+    <string name="balance_in_wallet">Balance in wallet</string>
+    <string name="card_bank">Cards/Bank Accounts</string>
+    <string name="affilate_service">Affilate Service</string>
+    <string name="group_friend">Manage group of friend</string>
+    <string name="payment_security">Payment Security</string>
+    <string name="setting">Setting</string>
+    <string name="log_out">Log Out</string>
 </resources>
