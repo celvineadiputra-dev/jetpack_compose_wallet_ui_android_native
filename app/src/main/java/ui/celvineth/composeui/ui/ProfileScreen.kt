@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -14,19 +15,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import ui.celvineth.composeui.R
 import ui.celvineth.composeui.ui.theme.*
 import ui.celvineth.composeui.ui.theme.component.NavigationComponent
 import ui.celvineth.composeui.ui.theme.component.Separator
 
-
 @Composable
 fun ProfileScreen(navController: NavController) {
     ComposeUiTheme {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .background(color = bgSeparator)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = bgSeparator)
+        ) {
             NavigationComponent(
                 navName = stringResource(id = R.string.profile),
                 context = LocalContext.current,
@@ -107,6 +110,7 @@ fun Point() {
     }
 }
 
+@Preview
 @Composable
 fun System() {
     data class Systems(val icon: Int, val text: String)
@@ -128,8 +132,11 @@ fun System() {
             .background(color = white)
             .padding(horizontal = dp32, vertical = dp16)
     ) {
-        items(listSystems) { item ->
+        itemsIndexed(listSystems) { index, item ->
             SystemSection(icon = item.icon, text = item.text)
+            if (index < 4) {
+                Spacer(modifier = Modifier.height(dp15))
+            }
         }
     }
 }
@@ -138,8 +145,7 @@ fun System() {
 fun SystemSection(icon: Int, text: String) {
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = dp12),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

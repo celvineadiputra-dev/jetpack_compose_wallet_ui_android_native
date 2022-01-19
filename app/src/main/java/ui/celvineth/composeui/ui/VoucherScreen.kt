@@ -100,11 +100,7 @@ fun CardVoucher(title: String, code: String, color: Color) {
                 )
 
                 Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(primary)) {
-                    Text(
-                        text = "Copy",
-                        style = MaterialTheme.typography.button.copy(color = white),
-                        modifier = Modifier.padding(horizontal = dp10)
-                    )
+                    Image(painter = painterResource(id = R.drawable.ic_copy), contentDescription = "copy")
                 }
             }
             Text(
@@ -153,8 +149,9 @@ fun ListCategories() {
         )
         LazyRow {
             items(listCategory) { item ->
-                Spacer(modifier = Modifier.width(dp8))
+                Spacer(modifier = Modifier.width(dp4))
                 Categories(text = item.text, icon = item.icon, color = item.color)
+                Spacer(modifier = Modifier.width(dp4))
             }
         }
     }

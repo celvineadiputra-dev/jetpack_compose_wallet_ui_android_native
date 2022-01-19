@@ -58,4 +58,6 @@
     <string name="payment_security">Payment Security</string>
     <string name="setting">Setting</string>
     <string name="log_out">Log Out</string>
+    <string name="top_up">Top up</string>
+    <string name="denominations">Denominations</string>
 </resources>
